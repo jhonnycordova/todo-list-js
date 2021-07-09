@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+    web:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        restart: always
+        volumes:
+            - ./frontend:/code
+            - /code/node_modules
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+            - REACT_APP_API_URL=http://localhost:9000
+        ports:
+            - 3000:3000
+        links:
+            - backend
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        ports:
+            - 9000:9000
+        volumes:
+            - ./backend:/code
+            - ./backend/nodemon.json:/code/nodemon.json
+            - /code/node_modules
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+            - CONNECTION_STRING=mongodb://todo_db:27017/todo
+            - PORT=9000
+        depends_on:
+            - db
+
+    db:
+        image: mongo:4.2
+        restart: unless-stopped
+        container_name: todo_db
+        volumes:
+            - mongodata:/data/db
+        ports:
+            - 27017:27017
+        logging:
+            driver: none
+
+volumes:
+    mongodata:

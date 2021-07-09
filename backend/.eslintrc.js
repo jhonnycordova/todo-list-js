@@ -15,6 +15,7 @@ module.exports = {
   plugins: [
     'jest',
   ],
-  rules: {
+  rules: {    
+    'linebreak-style': 'off',
   },
 };

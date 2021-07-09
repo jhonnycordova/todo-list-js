@@ -17,6 +17,8 @@ app.get('/', function (req, res) {
 
 // this will send exception to rollbar account
 app.use(rollbar.errorHandler());
+// app.use(rollbar.errorHandler());
+// app.use(rollbar.errorHandler());
 
 // server
 const server = app.listen(config.port || 3000, function () {

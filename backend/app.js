@@ -20,5 +20,6 @@ app.use(rollbar.errorHandler());
 
 // server
 const server = app.listen(config.port || 3000, function () {
+  // eslint-disable-next-line no-console
   console.log(`Listening http://localhost:${server.address().port}`);
 });

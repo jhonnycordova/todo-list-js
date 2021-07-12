@@ -1,15 +1,16 @@
-FROM node:16.2.0-alpine
+FROM node:16.4-slim
 WORKDIR /code
 
 COPY package.json .
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH="/code/node_modules/.bin:$PATH"
+ENV PATH=$PATH:/home/node/.npm-global/bin
 RUN yarn
 RUN yarn global add nodemon
 
-ENV PATH="/code/node_modules/.bin:$PATH"
-ENV NODE_PATH=./dist
 EXPOSE 80
+RUN apt-get update && apt-get install git zsh curl -y
 
-RUN apk update && apk add --update --no-cache git zsh curl 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 COPY . .
 

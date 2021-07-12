@@ -1,21 +1,10 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-const toDoSchema = new Schema({
-    text: { type: String, required: true, index: true },
-    isCompleted: Boolean,
-    order: Number
-}, { timestamps: { createdAt: 'created_at', updatedAt : 'updated_at ' } });
+const toDoSchema = new mongoose.Schema({
+  text: { type: String, required: true, index: true },
+  isCompleted: {type: Boolean, default: false},
+  order: Number,
+}, { timestamps: true });
 
-toDoSchema.set("toJSON", {
-  transform: (_, returnedObj) => {
-    returnedObj.id = returnedObj._id;
-    delete returnedObj._id;
-    delete returnedObj.__v;
-
-    return returnedObj
-  },
-});
-
-export const ToDo = mongoose.model("ToDo", toDoSchema);
-
+const ToDo = mongoose.model('ToDo', toDoSchema);
+module.exports = ToDo;

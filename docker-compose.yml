@@ -29,6 +29,7 @@ services:
         environment:
             - CHOKIDAR_USEPOLLING=true
             - CONNECTION_STRING=mongodb://todo_db:27017/todo
+            - CONNECTION_STRING_TEST=mongodb://todo_db:27017/todo
             - PORT=9000
         depends_on:
             - db

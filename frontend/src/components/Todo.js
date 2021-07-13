@@ -1,15 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Todo = ({ toDo }) => (
-  <div>
-    <input type="checkbox" name="completed" id="completed" />
-    <input type="text" name="task" id="task" value={toDo.task} />
-    <button type="button">Delete</button>
-  </div>
-);
+const Todo = ({ toDo, handleToggle, deleteToDo }) => {
+  const handleCheckboxChanged = () => {
+    handleToggle(toDo.id);
+  };
 
-Todo.defaultProps = { toDo: {} };
+  const handleClickDeleteButton = () => {
+    deleteToDo(toDo.id);
+  };
+
+  return (
+    <div>
+      <input type="checkbox" name="completed" onChange={handleCheckboxChanged} checked={toDo.completed} />
+      <input type="text" name="task" value={toDo.task} />
+      <button type="button" onClick={handleClickDeleteButton}>
+        Delete
+      </button>
+    </div>
+  );
+};
+
+Todo.defaultProps = { toDo: {}, handleToggle: () => {}, deleteToDo: () => {} };
 
 Todo.propTypes = {
   toDo: PropTypes.shape({
@@ -17,6 +29,8 @@ Todo.propTypes = {
     task: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
   }),
+  handleToggle: PropTypes.func,
+  deleteToDo: PropTypes.func,
 };
 
 export default Todo;

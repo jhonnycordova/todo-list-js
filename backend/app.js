@@ -1,23 +1,16 @@
 const express = require('express');
-const Rollbar = require('rollbar');
 const { config } = require('./config/config');
-
-const rollbar = new Rollbar({
-  accessToken: config.rollbarToken,
-  captureUncaught: true,
-  captureUnhandledRejections: true,
-  environment: config.environment,
-});
+const Rollbar = require('./lib/rollbar');
 // app
 const app = express();
 
 app.get('/', (req, res) => {
-  // rollbar.info('Awesome, this is a info log!');
+  // Rollbar.log('Awesome, this is a info log!');
   res.send('Hola Mundo');
 });
 
 // this will send exception to rollbar account
-app.use(rollbar.errorHandler());
+app.use(Rollbar.errorHandler());
 
 // server
 const server = app.listen(config.port || 3000, () => {

@@ -15,7 +15,7 @@ export default (props) => {
   return (
     <FormControl>
       <InputLabel htmlFor="new-todo-input">Todo Name</InputLabel>
-      <Input id="new-todo-input" aria-describedby="my-helper-text" ref={inputRef} />
+      <Input id="new-todo-input" ref={inputRef} />
       <Button color="primary" onClick={handleClick}>Add</Button>
     </FormControl>
   );

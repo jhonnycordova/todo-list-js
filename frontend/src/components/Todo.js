@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Todo = ({ toDo, handleToggle, deleteToDo }) => {
+const Todo = ({ toDo, onHandleToggle, onDeleteToDo }) => {
   const handleCheckboxChanged = () => {
-    handleToggle(toDo.id);
+    onHandleToggle(toDo.id);
   };
 
   const handleClickDeleteButton = () => {
-    deleteToDo(toDo.id);
+    onDeleteToDo(toDo.id);
   };
 
   return (
@@ -21,7 +21,7 @@ const Todo = ({ toDo, handleToggle, deleteToDo }) => {
   );
 };
 
-Todo.defaultProps = { toDo: {}, handleToggle: () => {}, deleteToDo: () => {} };
+Todo.defaultProps = { toDo: {}, onHandleToggle: () => {}, onDeleteToDo: () => {} };
 
 Todo.propTypes = {
   toDo: PropTypes.shape({
@@ -29,8 +29,8 @@ Todo.propTypes = {
     task: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
   }),
-  handleToggle: PropTypes.func,
-  deleteToDo: PropTypes.func,
+  onHandleToggle: PropTypes.func,
+  onDeleteToDo: PropTypes.func,
 };
 
 export default Todo;

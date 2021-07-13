@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Todo from './Todo';
 
-const TodoList = ({ toDoList, handleToggle, deleteToDo }) => (
+const TodoList = ({ toDoList, onHandleToggle, onDeleteToDo }) => (
   <div>
     {toDoList.map((todo) => (
-      <Todo key={todo.id} toDo={todo} handleToggle={handleToggle} deleteToDo={deleteToDo} />
+      <Todo key={todo.id} toDo={todo} onHandleToggle={onHandleToggle} onDeleteToDo={onDeleteToDo} />
     ))}
   </div>
 );
 
-TodoList.defaultProps = { toDoList: [], handleToggle: () => {}, deleteToDo: () => {} };
+TodoList.defaultProps = { toDoList: [], onHandleToggle: () => {}, onDeleteToDo: () => {} };
 TodoList.propTypes = {
   toDoList: PropTypes.checkPropTypes(PropTypes.array),
-  handleToggle: PropTypes.func,
-  deleteToDo: PropTypes.func,
+  onHandleToggle: PropTypes.func,
+  onDeleteToDo: PropTypes.func,
 };
 
 export default TodoList;

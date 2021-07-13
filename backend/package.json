@@ -17,6 +17,7 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "joi": "^17.4.1",
     "mongoose": "^5.13.2",
     "rollbar": "^2.24.0"
   },
@@ -25,6 +26,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
     "jest": "^27.0.6",
-    "nodemon": "^2.0.9"
+    "nodemon": "^2.0.9",
+    "supertest": "^6.1.3"
   }
 }

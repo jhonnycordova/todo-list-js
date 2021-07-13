@@ -8,6 +8,7 @@ export default (props) => {
 
   const handleClick = () => {
     const inputValue = inputRef.current.value;
+    if (inputValue === '') return;
     props.addNewTodo(inputValue);
   };
 

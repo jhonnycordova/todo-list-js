@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FormControl, Input, InputLabel, FormHelperText, Button,
+  FormControl, Input, InputLabel, Button,
 } from '@material-ui/core';
 
 export default (props) => {
@@ -15,7 +15,6 @@ export default (props) => {
     <FormControl>
       <InputLabel htmlFor="new-todo-input">Todo Name</InputLabel>
       <Input id="new-todo-input" aria-describedby="my-helper-text" ref={inputRef} />
-      <FormHelperText id="my-helper-text">Add new todo...</FormHelperText>
       <Button color="primary" onClick={handleClick}>Add</Button>
     </FormControl>
   );

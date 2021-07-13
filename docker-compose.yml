@@ -7,8 +7,7 @@ services:
             dockerfile: Dockerfile
         restart: always
         volumes:
-            - ./frontend:/code
-            - /code/node_modules
+            - ./frontend:/code/web
         environment:
             - CHOKIDAR_USEPOLLING=true
             - REACT_APP_API_URL=http://localhost:9000
@@ -23,9 +22,7 @@ services:
         ports:
             - 9000:9000
         volumes:
-            - ./backend:/code
-            - ./backend/nodemon.json:/code/nodemon.json
-            - /code/node_modules
+            - ./backend:/code/app
         environment:
             - CHOKIDAR_USEPOLLING=true
             - CONNECTION_STRING=mongodb://todo_db:27017/todo

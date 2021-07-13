@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema({
     type: String, required: true, index: true, unique: true, lowercase: true,
   },
   password: String,
+  todos: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'ToDo' },
+  ],
 }, { timestamps: { } });
 
 UserSchema.pre('save', function encryptPassword(next) {

@@ -13,30 +13,44 @@ describe('User Model test ', () => {
   afterEach(async () => clearDatabase());
   afterAll(async () => closeDatabase());
 
-  it('Create and save success', async () => {
+  it('Create and save success', (done) => {
     const user = new User(userData);
-    const savedUser = await user.save();
+    user.save().then((savedUser) => {
+      /* eslint-disable */
+      expect(savedUser._id).toBeDefined();
+      /* eslint-enable */
+      expect(savedUser.createdAt).toBeDefined();
+      expect(savedUser.name).toBe(userData.name);
+      expect(savedUser.email).toBe(userData.email);
+      expect(savedUser.password).not.toBe(userData.password);
 
-    /* eslint-disable */
-    expect(savedUser._id).toBeDefined();
-    /* eslint-enable */
-    expect(savedUser.createdAt).toBeDefined();
-    expect(savedUser.name).toBe(userData.name);
-    expect(savedUser.email).toBe(userData.email);
-    expect(savedUser.password).not.toBe(userData.password);
-    savedUser.comparePassword(userData.password, (err, isMatch) => {
-      expect(isMatch).toBeTruthy();
+      const callbackComparePwd = (err, isMatch) => {
+        try {
+          expect(isMatch).toBeTruthy();
+          done();
+        } catch (error) {
+          done(error);
+        }
+      };
+      savedUser.comparePassword(userData.password, callbackComparePwd);
     });
   });
 
-  it('Create user and compare with different password', async () => {
+  it('Create user and compare with different password', (done) => {
     const user = new User(userData);
-    const savedUser = await user.save();
+    user.save().then((savedUser) => {
+      expect(savedUser.email).toBe(userData.email);
+      expect(savedUser.password).not.toBe(userData.password);
 
-    expect(savedUser.email).toBe(userData.email);
-    expect(savedUser.password).not.toBe(userData.password);
-    savedUser.comparePassword('RandomDifferentPassword', (err, isMatch) => {
-      expect(isMatch).toBeFalsy();
+      const callbackComparePwd = (err, isMatch) => {
+        try {
+          expect(isMatch).toBeFalsy();
+          done();
+        } catch (error) {
+          done(error);
+        }
+      };
+      savedUser.comparePassword('RandomDifferentPassword', callbackComparePwd);
     });
   });
 
@@ -71,5 +85,4 @@ describe('User Model test ', () => {
     expect(err.message).toMatch(/duplicate key error collection/);
     expect(err.message).toMatch(/email_1 dup key/);
   });
-  
 });

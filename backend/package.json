@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "NODE_ENV = test jest --testEnvironment=node --runInBand",
+    "test": "NODE_ENV=test jest --testEnvironment=node --runInBand",
     "lint": "eslint . --ext .js || true",
     "lint:fix": "eslint . --ext .js --fix || true"
   },

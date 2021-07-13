@@ -1,8 +1,11 @@
 import React from 'react';
+import Theme from './components/Theme';
 
 function App() {
   return (
-    <div className="App" />
+    <Theme>
+      <div className="App"> Probando el funcionamiento</div>
+    </Theme>
   );
 }
 

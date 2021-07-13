@@ -3,12 +3,13 @@ import TodoList from './components/TodoList';
 import data from './data.json';
 
 function App() {
-  const [todoList, setTodoList] = useState(data);
+  const [todoList] = useState(data);
 
   return (
     // setTodoList();
     <div className="App">
-      <h1>ToDo List</h1>
+      <h1>Welcome </h1>
+      <h2>To Do List</h2>
       <TodoList toDoList={todoList} />
     </div>
   );

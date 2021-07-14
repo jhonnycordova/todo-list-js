@@ -26,7 +26,6 @@ function App() {
     <Theme>
       <div className="App">
         <h1>Welcome </h1>
-        <h2>To Do List</h2>
         <TodoList toDoList={todoList} onHandleToggle={onHandleToggle} onDeleteToDo={onDeleteToDo} />
       </div>
     </Theme>

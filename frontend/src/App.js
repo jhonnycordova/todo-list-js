@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FormControl, MenuItem, Select } from '@material-ui/core';
+
 import TodoList from './components/TodoList';
 import data from './data.json';
 import Theme from './components/Theme';
+import Filters from './components/Filters';
 
 function App() {
   const [todoList, setToDoList] = useState(data);
@@ -23,19 +24,25 @@ function App() {
     setToDoList(filtered);
   };
 
+  const handleFilter = (filter) => {
+    /** TEST CODE */
+    const COMPLETED = 'completed';
+    if (filter === '') {
+      setToDoList(data);
+      return;
+    }
+
+    const isCompleted = filter === COMPLETED;
+
+    const filtered = data.filter((task) => task.isCompleted === isCompleted);
+    setToDoList(filtered);
+  };
+
   return (
     <Theme>
       <div className="App">
         <h1>Welcome </h1>
-        <FormControl>
-          <Select value="" displayEmpty>
-            <MenuItem value="">
-              <em>Estado de la tarea</em>
-            </MenuItem>
-            <MenuItem value="completed">Completada</MenuItem>
-            <MenuItem value="not_completed">Por completar</MenuItem>
-          </Select>
-        </FormControl>
+        <Filters onFiltersChanged={handleFilter} />
         <TodoList toDoList={todoList} onHandleToggle={onHandleToggle} onDeleteToDo={onDeleteToDo} />
       </div>
     </Theme>

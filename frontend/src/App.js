@@ -11,7 +11,7 @@ function App() {
     // I need to call a service to update todo in mongoDB
     /* eslint-disable */
     const mapped = todoList.map((task) => {
-      return task.id === id ? { ...task, completed: !task.completed } : { ...task };
+      return task.id === id ? { ...task, isCompleted: !task.isCompleted } : { ...task };
     });
     setToDoList(mapped);
     /* eslint-enable */

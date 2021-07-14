@@ -4,7 +4,7 @@ import { TextField, Checkbox, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 
 const Todo = ({ toDo, onHandleToggle, onDeleteToDo }) => {
-  const [isCompleted, setIsCompleted] = useState(toDo.completed);
+  const [isCompleted, setIsCompleted] = useState(toDo.isCompleted);
   const handleCheckboxChanged = () => {
     setIsCompleted(!isCompleted);
     onHandleToggle(toDo.id, isCompleted);
@@ -31,7 +31,7 @@ Todo.propTypes = {
   toDo: PropTypes.shape({
     id: PropTypes.number.isRequired,
     task: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired,
+    isCompleted: PropTypes.bool.isRequired,
   }),
   onHandleToggle: PropTypes.func,
   onDeleteToDo: PropTypes.func,

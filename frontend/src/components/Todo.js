@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Checkbox, IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 
 const Todo = ({ toDo, onHandleToggle, onDeleteToDo }) => {
+  const [isCompleted, setIsCompleted] = useState(toDo.completed);
   const handleCheckboxChanged = () => {
-    onHandleToggle(toDo.id);
+    setIsCompleted(!isCompleted);
+    onHandleToggle(toDo.id, isCompleted);
   };
 
   const handleClickDeleteButton = () => {
@@ -14,8 +16,8 @@ const Todo = ({ toDo, onHandleToggle, onDeleteToDo }) => {
 
   return (
     <div>
-      <Checkbox checked={toDo.completed} onChange={handleCheckboxChanged} />
-      <TextField value={toDo.task} style={{ textDecoration: toDo.completed ? 'line-through' : 'none' }} />
+      <Checkbox checked={isCompleted} onChange={handleCheckboxChanged} />
+      <TextField value={toDo.task} style={{ textDecoration: isCompleted ? 'line-through' : 'none' }} />
       <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleClickDeleteButton}>
         <Delete />
       </IconButton>

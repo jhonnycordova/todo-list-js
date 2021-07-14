@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TextField, Checkbox, IconButton } from '@material-ui/core';
+import { Delete } from '@material-ui/icons';
 
 const Todo = ({ toDo, onHandleToggle, onDeleteToDo }) => {
   const handleCheckboxChanged = () => {
@@ -12,11 +14,11 @@ const Todo = ({ toDo, onHandleToggle, onDeleteToDo }) => {
 
   return (
     <div>
-      <input type="checkbox" name="completed" onChange={handleCheckboxChanged} checked={toDo.completed} />
-      <input type="text" name="task" value={toDo.task} />
-      <button type="button" onClick={handleClickDeleteButton}>
-        Delete
-      </button>
+      <Checkbox checked={toDo.completed} onChange={handleCheckboxChanged} />
+      <TextField value={toDo.task} style={{ textDecoration: toDo.completed ? 'line-through' : 'none' }} />
+      <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleClickDeleteButton}>
+        <Delete />
+      </IconButton>
     </div>
   );
 };

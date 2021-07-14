@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import TodoList from './components/TodoList';
 import data from './data.json';
@@ -7,6 +7,20 @@ import Filters from './components/Filters';
 
 function App() {
   const [todoList, setToDoList] = useState(data);
+  const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    /** TEST CODE */
+    const COMPLETED = 'completed';
+    if (filter === '') {
+      return;
+    }
+
+    const isCompleted = filter === COMPLETED;
+
+    const filtered = todoList.filter((task) => task.isCompleted === isCompleted);
+    setToDoList(filtered);
+  }, [filter]);
 
   const onHandleToggle = (id) => {
     // I need to call a service to update todo in mongoDB
@@ -24,18 +38,9 @@ function App() {
     setToDoList(filtered);
   };
 
-  const handleFilter = (filter) => {
-    /** TEST CODE */
-    const COMPLETED = 'completed';
-    if (filter === '') {
-      setToDoList(data);
-      return;
-    }
-
-    const isCompleted = filter === COMPLETED;
-
-    const filtered = data.filter((task) => task.isCompleted === isCompleted);
-    setToDoList(filtered);
+  const handleFilter = (newFilter) => {
+    setToDoList(data);
+    setFilter(newFilter);
   };
 
   return (

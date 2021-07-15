@@ -43,12 +43,22 @@ function App() {
     setFilter(newFilter);
   };
 
+  const handleDrag = (toDoId, source, destionation) => {
+    console.log(toDoId, source, destionation);
+    // service?
+  };
+
   return (
     <Theme>
       <Container maxWidth="sm">
         <h1>Welcome </h1>
         <Filters onFiltersChanged={handleFilter} />
-        <TodoList toDoList={todoList} onHandleToggle={onHandleToggle} onDeleteToDo={onDeleteToDo} />
+        <TodoList
+          toDoList={todoList}
+          onHandleToggle={onHandleToggle}
+          onDeleteToDo={onDeleteToDo}
+          onDragToDo={handleDrag}
+        />
       </Container>
     </Theme>
   );

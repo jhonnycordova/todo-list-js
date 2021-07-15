@@ -1,17 +1,17 @@
 const User = require('../database/schemas/User');
 
-const login = async ({ email, password }) => {
-  const user = await User.findOne({ email }, 'email name');
-  if (!user) {
-    throw new Error('wrong credentials');
-  }
-
-  const isChecked = await user.comparePassword(password);
-  if (!isChecked) {
-    throw new Error('wrong credentials');
-  }
-
-  return user.lean();
+const login = ({ email, password }) => {
+  return new Promise((resolve, reject) => {
+    User.findOne({ email }, 'email name password', (err, user) => {
+      if (err) return reject(new Error('login error'));
+      if (!user) return reject(new Error('wrong credentials'));
+      user.comparePassword(password, (error, isMatch) => {
+        if (error) return reject(new Error('wrong credentials'));
+        if (isMatch !== true) return reject(new Error('wrong credentials'));
+        resolve({ name: user.name, email: user.email });
+      });
+    });
+  });
 };
 
 const signup = async ({ name, email, password }) => {

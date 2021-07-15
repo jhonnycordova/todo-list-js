@@ -1,6 +1,10 @@
 const authService = require('./auth');
+const { connect, closeDatabase } = require('../database/mock-connection');
 
 describe('Auth Service', () => {
+  beforeAll(async () => connect());
+  afterAll(async () => closeDatabase());
+
   it('should create a new user', async () => {
     const createdUser = await authService.signup({
       name: 'Peter',
@@ -25,11 +29,13 @@ describe('Auth Service', () => {
   });
 
   it('should login with invalid password', async () => {
-    const promise = authService.login({
+    expect.assertions(1);
+    return authService.login({
       email: 'peter@gmail.com',
-      password: 'invalid',
-    });
-
-    await expect(promise).toBeRejected();
+      password: 'incorrect_password',
+    })
+      .catch((error) => {
+        expect(error.message).toBe('wrong credentials');
+      });
   });
 });

@@ -8,7 +8,7 @@ async function main() {
   await connectDatabase();
   const app = express();
 
-  app.use('/api/auth/', authController());
+  app.use('/auth/', authController);
 
   // this will send exception to rollbar account
   app.use(Rollbar.errorHandler());

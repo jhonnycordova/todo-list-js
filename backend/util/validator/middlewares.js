@@ -13,6 +13,6 @@ const middleware = (schema, property) => (req, res, next) => {
   }
 };
 
-const validBody = (schema) => middleware(schema, 'body')
-const validParams = (schema) => middleware(schema, 'params')
-module.exports = {validBody, validParams};
+const validBody = (schema) => middleware(schema, 'body');
+const validParams = (schema) => middleware(schema, 'params');
+module.exports = { validBody, validParams };

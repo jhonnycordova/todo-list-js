@@ -18,7 +18,7 @@ const Todo = ({ toDo, onHandleToggle, onDeleteToDo }) => {
     <div>
       <Checkbox checked={isCompleted} onChange={handleCheckboxChanged} />
       <TextField value={toDo.task} style={{ textDecoration: isCompleted ? 'line-through' : 'none' }} />
-      <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleClickDeleteButton}>
+      <IconButton color="primary" aria-label="delete todo" onClick={handleClickDeleteButton}>
         <Delete />
       </IconButton>
     </div>

@@ -8,7 +8,7 @@ const middleware = (schema, property) => (req, res, next) => {
   else {
     const { details } = error;
     const message = details.map((i) => i.message).join(',');
-    Rollbar.errorHandler(message);
+    Rollbar.error(message);
     res.status(422).json({ error: message });
   }
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import TodoList from '../components/TodoList';
+import TodoList from './TodoList';
 
 test('renders todo title', () => {
   render(<TodoList />);
@@ -16,4 +16,11 @@ test('renders toDos children', () => {
   const { queryByDisplayValue } = render(<TodoList toDoList={toDoList} />);
   expect(queryByDisplayValue(/task1/i)).toBeInTheDocument();
   expect(queryByDisplayValue(/task2/i)).toBeInTheDocument();
+});
+
+test('show message when list doesnt have toDos ', () => {
+  const toDoList = [];
+  render(<TodoList toDoList={toDoList} />);
+
+  expect(screen.getByText(/Nothing to show/i)).toBeInTheDocument();
 });

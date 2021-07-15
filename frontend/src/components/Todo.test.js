@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Todo from '../components/Todo';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import Todo from './Todo';
 
 test('call right function when user click on delete', () => {
   const toDo = { id: 1, task: 'task1 ', isCompleted: false };

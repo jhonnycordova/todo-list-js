@@ -13,14 +13,14 @@ test('renders toDos children', () => {
     { id: 1, task: 'task1 ', isCompleted: false },
     { id: 2, task: 'task2 ', isCompleted: true },
   ];
-  const { queryAllByDisplayValue } = render(<TodoList toDoList={toDoList} />);
+  const { queryAllByDisplayValue } = render(<TodoList toDos={toDoList} />);
   expect(queryAllByDisplayValue(/task1/i)[0]).toBeInTheDocument(); // Draggable others element with value "task"..
   expect(queryAllByDisplayValue(/task2/i)[0]).toBeInTheDocument();
 });
 
 test('show message when list doesnt have toDos', () => {
   const toDoList = [];
-  render(<TodoList toDoList={toDoList} />);
+  render(<TodoList toDos={toDoList} />);
 
   expect(screen.getByText(/Nothing to show/i)).toBeInTheDocument();
 });

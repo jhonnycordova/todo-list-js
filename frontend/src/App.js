@@ -54,7 +54,7 @@ function App() {
         <h1>Welcome </h1>
         <Filters onFiltersChanged={handleFilter} />
         <TodoList
-          toDoList={todoList}
+          toDos={todoList}
           onHandleToggle={onHandleToggle}
           onDeleteToDo={onDeleteToDo}
           onDragToDo={handleDrag}

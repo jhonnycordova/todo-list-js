@@ -20,5 +20,3 @@ test('call right function when user click on checkbox to toggle todo status', ()
   userEvent.click(checkbox);
   expect(onHandleToggleMock).toBeCalled();
 });
-
-// appears line-through when user click checkbox on uncompleted task

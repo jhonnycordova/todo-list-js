@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import Container from '@material-ui/core/Container';
 import TodoList from './components/TodoList';
 import data from './data.json';
 import Theme from './components/Theme';
@@ -45,11 +45,11 @@ function App() {
 
   return (
     <Theme>
-      <div className="App">
+      <Container maxWidth="sm">
         <h1>Welcome </h1>
         <Filters onFiltersChanged={handleFilter} />
         <TodoList toDoList={todoList} onHandleToggle={onHandleToggle} onDeleteToDo={onDeleteToDo} />
-      </div>
+      </Container>
     </Theme>
   );
 }

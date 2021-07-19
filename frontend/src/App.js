@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
+import { IconButton } from '@material-ui/core';
+import SortByAlphaIcon from '@material-ui/icons/SortByAlpha';
 import TodoList from './components/TodoList';
 import data from './data.json';
 import Theme from './components/Theme';
@@ -48,11 +50,21 @@ function App() {
     // service?
   };
 
+  const onSorting = () => {
+    console.log('Sorting');
+
+    const sortedToDos = [...todoList].sort((a, b) => a.task.localeCompare(b.task));
+    setToDoList(sortedToDos);
+  };
+
   return (
     <Theme>
       <Container maxWidth="sm">
         <h1>Welcome </h1>
         <Filters onFiltersChanged={handleFilter} />
+        <IconButton color="primary" aria-label="sorting todos" onClick={onSorting}>
+          <SortByAlphaIcon />
+        </IconButton>
         <TodoList
           toDos={todoList}
           onHandleToggle={onHandleToggle}

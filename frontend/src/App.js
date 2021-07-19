@@ -51,8 +51,6 @@ function App() {
   };
 
   const onSorting = () => {
-    console.log('Sorting');
-
     const sortedToDos = [...todoList].sort((a, b) => a.task.localeCompare(b.task));
     setToDoList(sortedToDos);
   };

@@ -13,5 +13,8 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'arrow-body-style': 'off',
+    'consistent-return': 'off',
   },
 };

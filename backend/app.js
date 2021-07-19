@@ -1,19 +1,29 @@
 const express = require('express');
 const { config } = require('./config/config');
 const Rollbar = require('./lib/rollbar');
-// app
-const app = express();
+const connectDatabase = require('./database/connection');
+const authController = require('./controllers/auth');
 
-app.get('/', (req, res) => {
-  // Rollbar.log('Awesome, this is a info log!');
-  res.send('Hola Mundo');
-});
+async function main() {
+  await connectDatabase();
+  const app = express();
 
-// this will send exception to rollbar account
-app.use(Rollbar.errorHandler());
+  app.use('/auth/', authController);
 
-// server
-const server = app.listen(config.port || 3000, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Listening http://localhost:${server.address().port}`);
-});
+  // this will send exception to rollbar account
+  app.use(Rollbar.errorHandler());
+
+  const server = app.listen(config.port || 3000, () => {
+    // eslint-disable-next-line no-console
+    console.log(`Listening http://localhost:${server.address().port}`);
+  });
+}
+
+main()
+  .catch((error) => {
+    /* eslint-disable no-console */
+    // TODO: use with rollbar
+    console.log('Unexpected error');
+    console.error(error);
+    /* eslint-enable no-console */
+  });
